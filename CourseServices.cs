@@ -7,17 +7,17 @@ namespace cs330_proj1
     {
         private CourseRepository repo = new CourseRepository();
 
-
+        /*
         // USER STORY 1 below: 
         //As a student, I want to search for course offerings that meet core goals 
         // so that I can register easily for courses that meet my program requirements
+
          public List<CourseOffering> getOfferingsByGoalIdAndSemester(String theGoalId, String semester) {
           //finish this method during the tutorial 
           return null;
         }
-
         
-        //Add more service functions here, as needed, for the project
+        */
 
         // USER STORY 2 below:
         /* As a student, I want to see all available courses so that I know what my options are */
@@ -33,6 +33,27 @@ namespace cs330_proj1
         // USER STORY 5 below:
         /* As a student I want to see all courses that meet a core goal, so that I can plan out
            my courses over the next few semesters and choose core courses that make sense for me */
+
+           public List<Course> getCoursesByGoalId(string goalId)
+            {
+               CoreGoal theGoal = null;
+
+               foreach (CoreGoal cg in repo.Goals)
+               {
+                  if (cg.Id.Equals(goalId))
+                  {
+                        theGoal = cg;
+                        break;
+                  }
+               }
+
+               if (theGoal == null)
+                  throw new Exception("Didn't find the goal");
+
+               return theGoal.Courses;
+            }
+
+
 
         // USER STORY 6 below:
         /* As a student I want to find a course that meets two different core goals, so that I can
