@@ -16,9 +16,6 @@ namespace cs330_proj1
           return null;
         }
 
-        
-        //Add more service functions here, as needed, for the project
-
         // USER STORY 2 below:
         /* As a student, I want to see all available courses so that I know what my options are */
 
@@ -38,6 +35,45 @@ namespace cs330_proj1
         /* As a student I want to find a course that meets two different core goals, so that I can
         "feed two birds with one seed" (save time by taking one class that will fulfill two 
           requirements */
+         public List<Course> getCoursesByGoalIds(params string[] goalIds)
+         {
+            if (goalIds.Length == 0) return new List<Course>();
+
+            HashSet<Course> intersectionSet = null;
+
+            foreach (string goalId in goalIds)
+            {
+               CoreGoal theGoal = null;
+
+               foreach (CoreGoal cg in repo.Goals)
+               {
+                     if (cg.Id.Equals(goalId))
+                     {
+                        theGoal = cg;
+                        break;
+                     }
+               }
+
+               if (theGoal == null)
+                     throw new Exception($"Didn't find the goal {goalId}");
+
+               // For the first goal, start the intersection set
+               if (intersectionSet == null)
+               {
+                     intersectionSet = new HashSet<Course>(theGoal.Courses);
+               }
+               else
+               {
+                     // Keep only courses that are already in intersectionSet
+                     intersectionSet.IntersectWith(theGoal.Courses);
+               }
+            }
+
+            return new List<Course>(intersectionSet);
+         }
+
+
+
 
         // USER STORY 7 below:
         /* As a freshman adviser, I want to see all the core goals which do not have any course offerings 
