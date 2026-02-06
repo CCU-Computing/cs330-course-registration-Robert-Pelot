@@ -13,18 +13,15 @@ namespace cs330courses
             
             CourseServices service = new CourseServices();
 
-            // USER STORY 1 below:
-
             Console.WriteLine("---------");
+            /*
+            // USER STORY 1 below:
             List<CourseOffering> theList = service.getOfferingsByGoalIdAndSemester("CG2","Spring 2021");
             foreach(CourseOffering c in theList) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-
             
-            // Make each of the next 6 sections of code work
-
             // USER STORY 2 below:
             /*
             List<Course> theList2 = service.getCourses();
@@ -54,24 +51,20 @@ namespace cs330courses
             }
             Console.WriteLine("---------");
 
-
             // USER STORY 6 below:
             List<Course> theList6 = service.getCoursesByGoalIds("CG2","CG1");
             foreach(Course c in theList6) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-
+            */
 
             // USER STORY 7 below:
-            List<CoreGoal> theList7 = service.getCoreGoalsThatAreNotCoveredBySemester("Fall 2020");
+            List<CoreGoal> theList7 = service.getCoreGoalsThatAreNotCoveredBySemester("Spring 2022");
             foreach(CoreGoal c in theList7) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-           */
-
-
             
 
         }//end main

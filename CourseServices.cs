@@ -43,6 +43,43 @@ namespace cs330_proj1
         /* As a freshman adviser, I want to see all the core goals which do not have any course offerings 
            for a given semester, so that I can work with departments to get some courses offered
            that students can take to meet those goals */
+
+            public List<CoreGoal> getCoreGoalsThatAreNotCoveredBySemester(string semester)
+            {
+               List<CoreGoal> results = new List<CoreGoal>();
+
+               foreach (CoreGoal cg in repo.Goals)
+               {
+                  bool hasOffering = false;
+
+                  foreach (Course c in cg.Courses)
+                  {
+                        foreach (CourseOffering o in repo.Offerings)
+                        {
+                           if (o.TheCourse == c && o.Semester.Equals(semester))
+                           {
+                              hasOffering = true;
+                              break;
+                           }
+                        }
+                        if (hasOffering) break;
+                  }
+
+                  if (!hasOffering)
+                  {
+                        // Return a new CoreGoal object with courses cleared
+                        results.Add(new CoreGoal
+                        {
+                           Id = cg.Id,
+                           Name = cg.Name,
+                           Description = cg.Description,
+                           Courses = new List<Course>() // empty, so printing doesn't show courses
+                        });
+                  }
+               }
+
+               return results;
+            }
        
      }
 }
