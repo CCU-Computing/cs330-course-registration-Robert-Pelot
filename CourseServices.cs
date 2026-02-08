@@ -40,11 +40,7 @@ namespace cs330_proj1
          }
          return courseOfferingsThatMeetGoal;
         }
-<<<<<<< HEAD
         
-=======
-
->>>>>>> user-story-6
         // USER STORY 2 below:
         /* As a student, I want to see all available courses so that I know what my options are */
         public List<Course> getCourses()
