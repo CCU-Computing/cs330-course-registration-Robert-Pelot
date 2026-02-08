@@ -39,7 +39,7 @@ namespace cs330_proj1
          }
          return courseOfferingsThatMeetGoal;
         }
-                
+        
         // USER STORY 2 below:
         /* As a student, I want to see all available courses so that I know what my options are */
         public List<Course> getCourses()
@@ -76,13 +76,27 @@ namespace cs330_proj1
             return results;
          }
 
-        // USER STORY 4 below:
-        /* As a student I want to see all course offerings by semester and department so that I can 
-
-
          // USER STORY 4 below:
          /* As a student I want to see all course offerings by semester and department so that I can 
         choose major courses to register for */
+         public List<CourseOffering> getCourseOfferingsBySemesterAndDept(string semester, string dept)
+         {
+            List<CourseOffering> results = new List<CourseOffering>();
+
+            foreach (CourseOffering o in repo.Offerings)
+            {
+               // split "CSCI 201" → ["CSCI", "201"]
+               string courseDept = o.TheCourse.Name.Split(' ')[0];
+
+               if (o.Semester.Equals(semester)
+                     && courseDept.Equals(dept))
+               {
+                     results.Add(o);
+               }
+            }
+
+            return results;
+         }
 
         // USER STORY 5 below:
         /* As a student I want to see all courses that meet a core goal, so that I can plan out
