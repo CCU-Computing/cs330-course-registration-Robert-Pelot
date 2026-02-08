@@ -14,8 +14,13 @@ namespace cs330courses
             CourseServices service = new CourseServices();
 
             Console.WriteLine("---------");
+<<<<<<< HEAD
             
             // USER STORY 1 below:
+=======
+            /*
+            // USER STORY 1 below:   
+>>>>>>> user-story-6
             List<CourseOffering> theList = service.getOfferingsByGoalIdAndSemester("CG2","Spring 2021");
             foreach(CourseOffering c in theList) {
                 Console.WriteLine(c);
@@ -49,7 +54,12 @@ namespace cs330courses
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
+<<<<<<< HEAD
             
+=======
+            */            
+
+>>>>>>> user-story-6
             // USER STORY 6 below:
             List<Course> theList6 = service.getCoursesByGoalIds("CG2","CG1");
             foreach(Course c in theList6) {
@@ -57,13 +67,22 @@ namespace cs330courses
             }
             Console.WriteLine("---------");
 
+<<<<<<< HEAD
+=======
+            /*
+>>>>>>> user-story-6
             // USER STORY 7 below:
             List<CoreGoal> theList7 = service.getCoreGoalsThatAreNotCoveredBySemester("Fall 2020");
             foreach(CoreGoal c in theList7) {
                 Console.WriteLine(c);
             }
+<<<<<<< HEAD
             Console.WriteLine("---------");          
 
+=======
+            Console.WriteLine("---------");
+           */           
+>>>>>>> user-story-6
         }//end main
     }
 }
