@@ -16,15 +16,14 @@ namespace cs330courses
             // USER STORY 1 below:
 
             Console.WriteLine("---------");
+            /*  user story 1:
             List<CourseOffering> theList = service.getOfferingsByGoalIdAndSemester("CG2","Spring 2021");
             foreach(CourseOffering c in theList) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-
+            */
             
-            // Make each of the next 6 sections of code work
-
             // USER STORY 2 below:
             /*
             List<Course> theList2 = service.getCourses();
