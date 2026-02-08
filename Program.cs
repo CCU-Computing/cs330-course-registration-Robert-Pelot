@@ -14,28 +14,13 @@ namespace cs330courses
             CourseServices service = new CourseServices();
 
             Console.WriteLine("---------");
-<<<<<<< HEAD
-<<<<<<< HEAD
             
             // USER STORY 1 below:
-=======
-            /*
-            // USER STORY 1 below:   
->>>>>>> user-story-6
-=======
-            /*
-            // USER STORY 1 below:
->>>>>>> user-story-7
             List<CourseOffering> theList = service.getOfferingsByGoalIdAndSemester("CG2","Spring 2021");
             foreach(CourseOffering c in theList) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> user-story-7
             // USER STORY 2 below:
             List<Course> theList2 = service.getCourses();
             foreach(Course c in theList2) {
@@ -63,48 +48,21 @@ namespace cs330courses
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-<<<<<<< HEAD
-            
-=======
-            */            
 
-<<<<<<< HEAD
->>>>>>> user-story-6
-=======
->>>>>>> user-story-7
             // USER STORY 6 below:
             List<Course> theList6 = service.getCoursesByGoalIds("CG2","CG1");
             foreach(Course c in theList6) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-=======
-            /*
->>>>>>> user-story-6
-=======
-            */
-
->>>>>>> user-story-7
             // USER STORY 7 below:
-            List<CoreGoal> theList7 = service.getCoreGoalsThatAreNotCoveredBySemester("Spring 2022");
+            List<CoreGoal> theList7 = service.getCoreGoalsThatAreNotCoveredBySemester("Fall 2020");
             foreach(CoreGoal c in theList7) {
                 Console.WriteLine(c);
             }
-<<<<<<< HEAD
             Console.WriteLine("---------");          
-
-=======
-            Console.WriteLine("---------");
-<<<<<<< HEAD
-           */           
->>>>>>> user-story-6
-=======
             
-
->>>>>>> user-story-7
         }//end main
     }
 }
