@@ -13,24 +13,15 @@ namespace cs330courses
             
             CourseServices service = new CourseServices();
 
-            // USER STORY 1 below:
-<<<<<<< HEAD
-=======
-            /*
-
->>>>>>> user-story-4
             Console.WriteLine("---------");
+            
+            // USER STORY 1 below:
             List<CourseOffering> theList = service.getOfferingsByGoalIdAndSemester("CG2","Spring 2021");
             foreach(CourseOffering c in theList) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-<<<<<<< HEAD
-            
-=======
-            */
-                        
->>>>>>> user-story-4
+
             // USER STORY 2 below:
             List<Course> theList2 = service.getCourses();
             foreach(Course c in theList2) {
@@ -45,8 +36,6 @@ namespace cs330courses
             }
             Console.WriteLine("---------");
 
-            */
-
             // USER STORY 4 below:
             List<CourseOffering> theList4 = service.getCourseOfferingsBySemesterAndDept("Spring 2021","ARTD");
             foreach(CourseOffering c in theList4) {
@@ -54,23 +43,19 @@ namespace cs330courses
             }
             Console.WriteLine("---------");
 
-            /*
-
             // USER STORY 5 below:
             List<Course> theList5 = service.getCoursesByGoalId("CG2");
             foreach(Course c in theList5) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-
-
+            
             // USER STORY 6 below:
             List<Course> theList6 = service.getCoursesByGoalIds("CG2","CG1");
             foreach(Course c in theList6) {
                 Console.WriteLine(c);
             }
             Console.WriteLine("---------");
-
 
             // USER STORY 7 below:
             List<CoreGoal> theList7 = service.getCoreGoalsThatAreNotCoveredBySemester("Fall 2020");
