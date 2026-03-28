@@ -12,34 +12,28 @@ namespace CourseRegistration.Services
    {
       private CourseRepository repo = new CourseRepository();
       
-      // USER STORY 2 below:
-      /* As a student, I want to see all available courses so that I know what my options are */
+      // Get list of all courses:
       public List<Course> GetAllCourses()
       {
          List<Course> theCourses = repo.GetAllCourses().ToList<Course>();
          return theCourses;
       }
 
-      // USER STORY 8 below:
-      /* As a student, I want to search for a course by name, so that I
-      can find out more information about the course and its offerings */
+      // Get specific course by name:
+
       public Course GetCourseByName(string name)
       {
          Course c = repo.GetCourseByName(name);
          return c;
       }
       
-      // USER STORY 10 below:
-      /* As a registrar, I want to add a new course to the system, so that
-      students can start registering for it */
+      // Add a new course to the database:
       public Course AddCourse(Course newCourse)
       {
          return repo.InsertCourse(newCourse);
       }
 
-      // USER STORY 11 below:
-      /* As a registrar, I want to update an existing course, so that I can
-      keep course information up to date */
+      // Update / Change a course in the database:
       public bool updateCourse(string name, Course updatedCourse)
       {
          Course existingCourse = repo.GetAllCourses().FirstOrDefault(c => c.Name == name);
@@ -50,22 +44,96 @@ namespace CourseRegistration.Services
          existingCourse.Title = updatedCourse.Title;
          existingCourse.Credits = updatedCourse.Credits;
          existingCourse.Description = updatedCourse.Description;
-
          return repo.UpdateCourse(existingCourse);
       }
+
+      // Delete a course from the repo.
       public bool DeleteCourse(string name)
       {
-         // Check if course exists
-         Course existingCourse = repo.GetAllCourses()
-                                    .FirstOrDefault(c => c.Name == name);
-
+         Course existingCourse = repo.GetAllCourses().FirstOrDefault(c => c.Name == name);
          if (existingCourse == null)
          {
             return false;
          }
-
-         // Call repository to delete
          return repo.DeleteCourse(name);
       }
+
+      // Get All Course goals:
+      public List<CoreGoal> GetAllCoreGoals()
+      {
+         return repo.GetAllCoreGoals().ToList();
+      }
+
+      // Get core goal by id:
+      public CoreGoal GetCoreGoalById(string id)
+      {
+         CoreGoal goal = repo.GetAllCoreGoals().FirstOrDefault(g => g.Id == id);
+         if (goal == null)
+            throw new Exception($"CoreGoal with ID '{id}' not found.");
+         return goal;
+      }
+
+      // get all classes that match a core goal id:
+      public CoreGoal GetCoreGoalWithCoursesById(string id)
+      {
+         CoreGoal goal = repo.GetCoreGoalById(id);
+         if (goal == null)
+            throw new Exception($"CoreGoal with ID '{id}' not found.");
+         goal.Courses = repo.GetCoursesByGoalId(id).ToList();
+         return goal;
+      }
+
+      // get all classes that match a core goal - just the class list:
+      public IEnumerable<Course> GetCoursesForCoreGoalById(string id)
+      {
+         // Optional: verify that the core goal exists
+         CoreGoal goal = repo.GetCoreGoalById(id);
+         if (goal == null)
+            throw new Exception($"CoreGoal with ID '{id}' not found.");
+
+         // Fetch all courses for this goal
+         return repo.GetCoursesByGoalId(id);
+      }
+
+      // Insert a new core goal
+      public CoreGoal InsertCoreGoal(CoreGoal newGoal)
+      {
+         // optional: check if ID already exists
+         var existingGoal = repo.GetCoreGoalById(newGoal.Id);
+         if (existingGoal != null)
+            throw new Exception($"CoreGoal with ID '{newGoal.Id}' already exists.");
+
+         return repo.AddCoreGoal(newGoal);
+      }
+
+      // Assign existing courses to a core goal
+      public void AssignCoursesToCoreGoal(string goalId, List<string> courseNames)
+      {
+         var goal = repo.GetCoreGoalById(goalId);
+         if (goal == null)
+            throw new Exception($"CoreGoal with ID '{goalId}' not found.");
+
+         repo.AddCoursesToCoreGoal(goalId, courseNames);
+      }
+
+      public bool UpdateCoreGoal(string id, CoreGoal modifiedGoal)
+      {
+         var existingGoal = repo.GetCoreGoalById(id);
+         if (existingGoal == null)
+            return false;
+
+         return repo.UpdateCoreGoal(id, modifiedGoal);
+      }
+
+      public bool DeleteCoreGoal(string id)
+      {
+         var existingGoal = repo.GetCoreGoalById(id);
+         if (existingGoal == null)
+            return false;
+
+         return repo.DeleteCoreGoal(id);
+      }
+
+   
    }
 }

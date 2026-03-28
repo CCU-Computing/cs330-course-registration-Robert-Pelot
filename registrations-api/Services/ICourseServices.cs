@@ -12,7 +12,14 @@ namespace CourseRegistration.Services
         Course GetCourseByName(string name);
         Course AddCourse(Course newCourse);
         bool updateCourse(string name, Course updatedCourse);
-
         bool DeleteCourse(string name);
+        List<CoreGoal> GetAllCoreGoals();
+        CoreGoal GetCoreGoalById(string id);
+        CoreGoal GetCoreGoalWithCoursesById(string id);
+        IEnumerable<Course> GetCoursesForCoreGoalById(string id);
+        CoreGoal InsertCoreGoal(CoreGoal newGoal);
+        void AssignCoursesToCoreGoal(string goalId, List<string> courseNames);
+        bool UpdateCoreGoal(string id, CoreGoal modifiedGoal);
+        bool DeleteCoreGoal(string id);
     }   
 }
