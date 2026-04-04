@@ -5,8 +5,19 @@ using MySql.Data.MySqlClient;
 
 namespace CourseRegistration.Repository
 {
-    public class CourseRepository
+    public interface ICourseRepository
     {
+        List<Course> Courses { get; set; }
+        List<CoreGoal> CoreGoals { get; set; }
+        List<CourseOffering> Offerings { get; set; }
+    }
+
+    public class CourseRepository : ICourseRepository
+    {
+        public List<Course> Courses { get; set; }
+        public List<CoreGoal> CoreGoals { get; set; }
+        public List<CourseOffering> Offerings { get; set; }
+        
         private MySqlConnection _connection;
 
         public IEnumerable<Course> AllCourses => GetAllCourses();
