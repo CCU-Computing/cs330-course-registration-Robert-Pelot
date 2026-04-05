@@ -263,5 +263,37 @@ namespace CourseRegistration.Controllers
                 return StatusCode(500, "An unexpected error occurred while deleting the core goal. Please try again later.");
             }
         }
+
+        
+        [HttpGet("offerings")]
+        public IActionResult GetOfferingsByGoalAndSemester([FromQuery] string goalId, [FromQuery] string semester)
+        {
+            try
+            {
+                var offerings = _courseServices.GetOfferingsByGoalIdAndSemester(goalId, semester);
+                return Ok(offerings);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("offerings/by-semester")]
+        public IActionResult GetOfferingsBySemester([FromQuery] string semester)
+        {
+            if (string.IsNullOrEmpty(semester))
+                return BadRequest("Semester query parameter is required.");
+
+            var offerings = _courseServices.GetOfferingsBySemester(semester);
+            return Ok(offerings);
+        }
+
+        [HttpGet("offerings/department")]
+        public IActionResult GetOfferingsBySemesterAndDepartment([FromQuery] string semester, [FromQuery] string department)
+        {
+            var offerings = _courseServices.GetOfferingsBySemesterAndDepartment(semester, department);
+            return Ok(offerings);
+        }
     }
 }

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CourseRegistration.Models;
 using CourseRegistration.Repository;
-using ICourseRepository = CourseRegistration.Repository.ICourseRepository;
-using linq = System.Linq;
 
 
 namespace CourseRegistration.Services
 {
-   public class CourseServices
+   public class CourseServices : ICourseServices
    {
       private readonly ICourseRepository _repo;
 
@@ -17,7 +15,6 @@ namespace CourseRegistration.Services
       {
          _repo = courseRepo;
       }
-      
       // Get list of all courses:
       public List<Course> GetAllCourses()
       {
@@ -138,6 +135,27 @@ namespace CourseRegistration.Services
             return false;
 
          return _repo.DeleteCoreGoal(id);
+      }
+
+      public IEnumerable<CourseOffering> GetOfferingsByGoalIdAndSemester(string goalId, string semester)
+      {
+         // Check if the core goal exists
+         var goal = _repo.GetCoreGoalById(goalId);
+         if (goal == null)
+            throw new Exception($"CoreGoal with ID '{goalId}' not found.");
+
+         // If it exists, get the offerings from the repository
+         return _repo.GetOfferingsByGoalIdAndSemester(goalId, semester);
+      }
+
+      public IEnumerable<CourseOffering> GetOfferingsBySemester(string semester)
+      {
+         return _repo.GetOfferingsBySemester(semester);
+      }
+
+      public IEnumerable<CourseOffering> GetOfferingsBySemesterAndDepartment(string semester, string department)
+      {
+         return _repo.GetOfferingsBySemesterAndDepartment(semester, department);
       }
 
    

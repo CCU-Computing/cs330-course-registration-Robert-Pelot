@@ -5,19 +5,12 @@ using MySql.Data.MySqlClient;
 
 namespace CourseRegistration.Repository
 {
-    public interface ICourseRepository
-    {
-        List<Course> Courses { get; set; }
-        List<CoreGoal> CoreGoals { get; set; }
-        List<CourseOffering> Offerings { get; set; }
-    }
-
     public class CourseRepository : ICourseRepository
     {
         public List<Course> Courses { get; set; }
         public List<CoreGoal> CoreGoals { get; set; }
         public List<CourseOffering> Offerings { get; set; }
-        
+
         private MySqlConnection _connection;
 
         public IEnumerable<Course> AllCourses => GetAllCourses();
@@ -285,5 +278,136 @@ namespace CourseRegistration.Repository
                 throw;
             }
         }
+        
+        // GET OFFERINGS BY CORE GOAL ID AND SEMESTER
+// GET OFFERINGS BY CORE GOAL ID AND SEMESTER
+        public IEnumerable<CourseOffering> GetOfferingsByGoalIdAndSemester(string goalId, string semester)
+        {
+            // Step 1: Get all course names for the goal and semester
+            var statement = @"
+                SELECT o.Course AS CourseName, o.Semester, o.Section
+                FROM CourseOfferings o
+                JOIN CoreGoalCourses gc ON o.Course = gc.CourseName
+                WHERE gc.GoalID = @GoalId AND o.Semester = @Semester";
+
+            List<CourseOffering> offerings = new List<CourseOffering>();
+            List<string> courseNames = new List<string>();
+
+            using (var command = new MySqlCommand(statement, _connection))
+            {
+                command.Parameters.AddWithValue("@GoalId", goalId);
+                command.Parameters.AddWithValue("@Semester", semester);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Save course names for later
+                        courseNames.Add(reader.GetString("CourseName"));
+
+                        // Save semester and section info temporarily
+                        offerings.Add(new CourseOffering
+                        {
+                            Semester = reader.GetString("Semester"),
+                            Section = reader.GetString("Section")
+                            // We'll fill TheCourse next
+                        });
+                    }
+                }
+            }
+
+            // Step 2: Now fetch Course objects for each course name
+            for (int i = 0; i < offerings.Count; i++)
+            {
+                offerings[i].TheCourse = GetCoursebyName(courseNames[i]);
+            }
+
+            return offerings;
+        }
+
+        public IEnumerable<CourseOffering> GetOfferingsBySemester(string semester)
+        {
+            var statement = @"
+                SELECT o.Course AS CourseName, o.Semester, o.Section
+                FROM CourseOfferings o
+                WHERE o.Semester = @Semester";
+
+            List<CourseOffering> offerings = new List<CourseOffering>();
+            List<string> courseNames = new List<string>();
+
+            using (var command = new MySqlCommand(statement, _connection))
+            {
+                command.Parameters.AddWithValue("@Semester", semester);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        courseNames.Add(reader.GetString("CourseName"));
+                        offerings.Add(new CourseOffering
+                        {
+                            Semester = reader.GetString("Semester"),
+                            Section = reader.GetString("Section")
+                        });
+                    }
+                }
+            }
+
+            // Populate the Course objects
+            for (int i = 0; i < offerings.Count; i++)
+            {
+                offerings[i].TheCourse = GetCoursebyName(courseNames[i]);
+            }
+
+            return offerings;
+        }
+
+        public IEnumerable<CourseOffering> GetOfferingsBySemesterAndDepartment(string semester, string department)
+        {
+            // Step 1: Get all course offerings for the semester and department
+            var statement = @"
+                SELECT o.Course AS CourseName, o.Semester, o.Section
+                FROM CourseOfferings o
+                JOIN Courses c ON o.Course = c.name
+                WHERE o.Semester = @Semester
+                AND LEFT(c.name, 4) = @Department";
+
+            List<CourseOffering> offerings = new List<CourseOffering>();
+            List<string> courseNames = new List<string>();
+
+            using (var command = new MySqlCommand(statement, _connection))
+            {
+                command.Parameters.AddWithValue("@Semester", semester);
+                command.Parameters.AddWithValue("@Department", department);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        courseNames.Add(reader.GetString("CourseName"));
+                        offerings.Add(new CourseOffering
+                        {
+                            Semester = reader.GetString("Semester"),
+                            Section = reader.GetString("Section")
+                            // We'll fill TheCourse next
+                        });
+                    }
+                }
+            }
+
+            // Step 2: Fetch Course objects for each course name
+            for (int i = 0; i < offerings.Count; i++)
+            {
+                offerings[i].TheCourse = GetCoursebyName(courseNames[i]);
+            }
+
+            return offerings;
+        }
+
+
+
+
+            
+
     }
 }

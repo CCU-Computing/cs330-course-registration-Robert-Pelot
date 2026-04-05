@@ -21,5 +21,8 @@ namespace CourseRegistration.Services
         void AssignCoursesToCoreGoal(string goalId, List<string> courseNames);
         bool UpdateCoreGoal(string id, CoreGoal modifiedGoal);
         bool DeleteCoreGoal(string id);
+        IEnumerable<CourseOffering> GetOfferingsByGoalIdAndSemester(string goalId, string semester);
+        IEnumerable<CourseOffering> GetOfferingsBySemester(string semester);
+        IEnumerable<CourseOffering> GetOfferingsBySemesterAndDepartment(string semester, string department);
     }   
 }
