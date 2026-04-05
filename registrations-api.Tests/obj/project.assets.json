@@ -733,7 +733,7 @@
       },
       "registrations-api/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
+        "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "MySql.Data": "9.6.0",
           "Swashbuckle.AspNetCore": "5.6.3"
