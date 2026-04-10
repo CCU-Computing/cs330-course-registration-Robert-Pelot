@@ -1,9 +1,0 @@
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.csproj.AssemblyReference.cache
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\rpswa.dswa.cache.json
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.GeneratedMSBuildEditorConfig.editorconfig
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.AssemblyInfoInputs.cache
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.AssemblyInfo.cs
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.csproj.CoreCompileInputs.cache
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.MvcApplicationPartsAssemblyInfo.cs
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.MvcApplicationPartsAssemblyInfo.cache
-D:\csci330sp26\cs330-course-registration-Robert-Pelot\registrations-api\obj\Debug\net10.0\registrations-api.sourcelink.json
