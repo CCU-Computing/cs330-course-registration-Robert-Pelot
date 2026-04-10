@@ -10,9 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using CourseRegistration.Services;
-
+using CourseRegistration.Repository;
+using Microsoft.OpenApi.Models;
 
 namespace CourseRegistration
 {
@@ -28,7 +28,8 @@ namespace CourseRegistration
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ICourseServices, CourseServices>();
+            services.AddSingleton<ICourseRepository, CourseRepository>(); 
+            services.AddSingleton<ICourseServices, CourseServices>();   
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
