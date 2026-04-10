@@ -14,13 +14,6 @@ namespace CourseRegistration.Repository
 {
     public class CourseRepository : ICourseRepository
     {
-<<<<<<< HEAD
-        public IEnumerable<Course> AllCourses => GetAllCourses();
-
-        public Course GetCourseByName(string name) => GetCoursebyName(name);
-
-        private MySqlConnection _connection;
-=======
         public List<Course> Courses { get; set; }
         public List<CoreGoal> CoreGoals { get; set; }
         public List<CourseOffering> Offerings { get; set; }
